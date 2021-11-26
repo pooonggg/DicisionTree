@@ -1,0 +1,15 @@
+!wget https://github.com/StrixzIV/Decision-Tree-Classifier/raw/main/music.csv
+import joblib
+import pandas as pd
+from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier
+music_data = pd.read_csv('music.csv')
+x = music_data.drop(columns = ['genre'])
+y = music_data['genre']
+model = DecisionTreeClassifier()
+model.fit(x, y)
+filename = 'model'
+joblib.dump(model, f'{filename}.joblib')
+model = joblib.load(f'{filename}.joblib')
+model.predict([[30, 0]])
+#เลข30เป็นอายุ ส่วนตัวเลขด้านหลังคือเพศซึ่งกำหนด0เป็นเพศหญิง 1เป็นเพศชาย
